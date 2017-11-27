@@ -8,27 +8,27 @@ def load_data(filepath):
         loaded_data = json.loads(opened_file.read())
     return loaded_data
 
-def get_biggest_bar(data):
+def get_biggest_bar(data_bars):
     biggest_bar_dict = dict()
-    for i in data['features']:
-        biggest_bar_dict[i['properties']['Attributes']['SeatsCount']] = i['properties']['Attributes']['Name']
+    for bar in data_bars['features']:
+        biggest_bar_dict[bar['properties']['Attributes']['SeatsCount']] = bar['properties']['Attributes']['Name']
     return biggest_bar_dict.get(max(biggest_bar_dict)),max(biggest_bar_dict)
 
 
-def get_smallest_bar(data):
+def get_smallest_bar(data_bars):
     smallest_bar_dict = dict()
-    for i in data['features']:
-        smallest_bar_dict[i['properties']['Attributes']['SeatsCount']] = i['properties']['Attributes']['Name']
+    for bar in data_bars['features']:
+        smallest_bar_dict[bar['properties']['Attributes']['SeatsCount']] = bar['properties']['Attributes']['Name']
     return smallest_bar_dict.get(min(smallest_bar_dict)),min(smallest_bar_dict)
 
 
-def get_closest_bar(data, longitude, latitude):
+def get_closest_bar(data_bars, longitude, latitude):
     closest_bar_dict = dict()
-    for i in data['features']:
-        closest_bar_dict[i['properties']['Attributes']['Name']] = i['geometry']['coordinates']
+    for bar in data_bars['features']:
+        closest_bar_dict[bar['properties']['Attributes']['Name']] = bar['geometry']['coordinates']
     closest_bar_dict2 = dict()
-    for i in closest_bar_dict.keys():
-        closest_bar_dict2[get_diff_coord(closest_bar_dict[i], [longitude, latitude])] = i
+    for closest_bar_dict_key in closest_bar_dict.keys():
+        closest_bar_dict2[get_diff_coord(closest_bar_dict[closest_bar_dict_key], [longitude, latitude])] = i
     return closest_bar_dict2[min(closest_bar_dict2.keys())]
 
 def get_diff_coord(coordinates,coordinates2): return math.sqrt(((coordinates[0] - coordinates2[0])+(coordinates[1] - coordinates2[1]))**2)
