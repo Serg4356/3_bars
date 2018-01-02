@@ -36,9 +36,9 @@ if __name__ == '__main__':
     user_longitude = int(input('Input your coordinates.\nLongitude: '))
     user_latitude = int(input('Latitude: '))
     try:
-        data = load_data(input('Input path to file: '))
-        print('The largest bar: ', get_biggest_bar(data))
-        print('The smallest bar: ', get_smallest_bar(data))
-        print('The closest: ', get_closest_bar(data, user_longitude, user_latitude))
+        bars_file = load_data(input('Input path to file: '))
+        print('The largest bar: ', get_biggest_bar(bars_file))
+        print('The smallest bar: ', get_smallest_bar(bars_file))
+        print('The closest: ', get_closest_bar(bars_file, user_longitude, user_latitude))
     except FileNotFoundError:
         print('Path is incorrect. Try again.')
