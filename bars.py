@@ -9,10 +9,6 @@ def load_data(filepath):
     return loaded_data
 
 
-def create_bars_description_list(loaded_data):
-    return loaded_data['features']
-
-
 def get_biggest_bar(bars_description_list):
     return max(
         bars_description_list,
@@ -49,7 +45,7 @@ if __name__ == '__main__':
         user_longitude = float(input('Input your coordinates.\nLongitude: '))
         user_latitude = float(input('Latitude: '))
         loaded_data = load_data(sys.argv[1])
-        bars = create_bars_description_list(loaded_data)
+        bars = loaded_data['features']
         print('The largest bar: ',
               get_biggest_bar(
                   bars

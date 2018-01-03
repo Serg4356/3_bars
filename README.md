@@ -10,12 +10,12 @@
 
 ```bash
 
-$ python bars.py # possibly requires call of python3 executive instead of just python
+$ python bars.py <path to file> # possibly requires call of python3 executive instead of just python
 
 ```
 Запуск на Windows происходит аналогично.
 
-Программа имеет простой консольный интерфейс. Пользователю последовательно предлагают ввести координаты(долготу и широту). Путь к файлу с описанием баров в формате JSON вводится как аргумент при запуске.
+Программа имеет простой консольный интерфейс. Пользователю последовательно предлагают ввести координаты(долготу и широту). Путь к файлу с описанием баров в формате JSON вводится как аргумент при запуске. Файл можно скачать по [ссылке](https://devman.org/media/filer_public/95/74/957441dc-78df-4c99-83b2-e93dfd13c2fa/bars.json)
 
 Результат работы программы:
 ```bash
