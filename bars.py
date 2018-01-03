@@ -13,25 +13,25 @@ def create_bars_description_list(loaded_data):
     return loaded_data['features']
 
 
-def get_biggest_bar_name(bars_description_list):
+def get_biggest_bar(bars_description_list):
     return max(
         bars_description_list,
         key=lambda x: x['properties']['Attributes']['SeatsCount']
-    )['properties']['Attributes']['Name']
+    )
 
 
-def get_smallest_bar_name(bars_description_list):
+def get_smallest_bar(bars_description_list):
     return min(
         bars_description_list,
         key=lambda x: x['properties']['Attributes']['SeatsCount']
-    )['properties']['Attributes']['Name']
+    )
 
 
 def calculate_coordinates(bar_longitude, bar_latitude, user_longitude, user_latitude):
     return abs(bar_longitude - user_longitude) + abs(bar_latitude - user_latitude)
 
 
-def get_closest_bar_name(bars_description_list, longitude, latitude):
+def get_closest_bar(bars_description_list, longitude, latitude):
     return min(
         bars_description_list,
         key= lambda x:
@@ -41,7 +41,7 @@ def get_closest_bar_name(bars_description_list, longitude, latitude):
             longitude,
             latitude
         )
-    )['properties']['Attributes']['Name']
+    )
 
 
 if __name__ == '__main__':
@@ -53,9 +53,22 @@ if __name__ == '__main__':
         sys.exit()
     try:
         loaded_data = load_data(sys.argv[1])
-        bars_description_list = create_bars_description_list(loaded_data)
-        print('The largest bar: ', get_biggest_bar_name(bars_file))
-        print('The smallest bar: ', get_smallest_bar_name(bars_file))
-        print('The closest: ', get_closest_bar_name(bars_file, user_longitude, user_latitude))
+        bars = create_bars_description_list(loaded_data)
+        print('The largest bar: ',
+              get_biggest_bar(
+                  bars
+              )['properties']['Attributes']['Name'])
+        print('The smallest bar: ',
+              get_smallest_bar(
+                  bars
+              )['properties']['Attributes']['Name'])
+        print('The closest: ',
+              get_closest_bar(
+                  bars,
+                  user_longitude,
+                  user_latitude
+              )['properties']['Attributes']['Name'])
     except FileNotFoundError:
         print('Path is incorrect. Try again.')
+    except IndexError:
+        print('Please enter path to file.')

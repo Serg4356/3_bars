@@ -15,7 +15,7 @@ $ python bars.py # possibly requires call of python3 executive instead of just p
 ```
 Запуск на Windows происходит аналогично.
 
-Программа имеет простой консольный интерфейс. Пользователю последовательно предлагают ввести координаты(долготу и широту), а также путь к файлу с описанием баров в формате JSON. 
+Программа имеет простой консольный интерфейс. Пользователю последовательно предлагают ввести координаты(долготу и широту). Путь к файлу с описанием баров в формате JSON вводится как аргумент при запуске.
 
 Результат работы программы:
 ```bash
@@ -23,11 +23,10 @@ $ python bars.py # possibly requires call of python3 executive instead of just p
 Input your coordinates.
 Longitude: 2
 Latitude: 3
-Input path to file: G:\devman\my_bars.txt
-The largest bar: Спорт бар «Красная машина»
-The smallest bar: БАР. СОКИ
-The closest: Staropramen
- 
+The largest bar:  Спорт бар «Красная машина»
+The smallest bar:  БАР. СОКИ
+The closest:  Staropramen
+
  ```
  
 
