@@ -9,36 +9,56 @@ def load_data(filepath):
     return loaded_data
 
 
-def get_biggest_bar(bars_file):
+def create_bars_description_list(loaded_data):
+    try:
+        return loaded_data['features']
+    except:
+        print('File structure is incorrect. Please load correct file.')
+
+
+def get_biggest_bar_name(bars_description_list):
     return max(
-        bars_file['features'],
+        bars_description_list,
         key=lambda x: x['properties']['Attributes']['SeatsCount']
     )['properties']['Attributes']['Name']
 
 
-def get_smallest_bar(bars_file):
+def get_smallest_bar_name(bars_description_list):
     return min(
-        bars_file['features'],
+        bars_description_list,
         key=lambda x: x['properties']['Attributes']['SeatsCount']
     )['properties']['Attributes']['Name']
 
 
-def get_closest_bar(bars_file, longitude, latitude):
+def calculate_coordinates(bar_longitude, bar_latitude, user_longitude, user_latitude):
+    return abs(bar_longitude - user_longitude) + abs(bar_latitude - user_latitude)
+
+
+def get_closest_bar_name(bars_description_list, longitude, latitude):
     return min(
-        bars_file['features'],
+        bars_description_list,
         key= lambda x:
-        abs(x['geometry']['coordinates'][0] - longitude)
-        + abs(x['geometry']['coordinates'][1] - latitude)
+        calculate_coordinates(
+            x['geometry']['coordinates'][0],
+            x['geometry']['coordinates'][1],
+            longitude,
+            latitude
+        )
     )['properties']['Attributes']['Name']
 
 
 if __name__ == '__main__':
-    user_longitude = int(input('Input your coordinates.\nLongitude: '))
-    user_latitude = int(input('Latitude: '))
     try:
-        bars_file = load_data(input('Input path to file: '))
-        print('The largest bar: ', get_biggest_bar(bars_file))
-        print('The smallest bar: ', get_smallest_bar(bars_file))
-        print('The closest: ', get_closest_bar(bars_file, user_longitude, user_latitude))
+        user_longitude = float(input('Input your coordinates.\nLongitude: '))
+        user_latitude = float(input('Latitude: '))
+    except ValueError:
+        print('Type of coordinates is incorrect. Try again.')
+        sys.exit()
+    try:
+        loaded_data = load_data(sys.argv[1])
+        bars_description_list = create_bars_description_list(loaded_data)
+        print('The largest bar: ', get_biggest_bar_name(bars_file))
+        print('The smallest bar: ', get_smallest_bar_name(bars_file))
+        print('The closest: ', get_closest_bar_name(bars_file, user_longitude, user_latitude))
     except FileNotFoundError:
         print('Path is incorrect. Try again.')
