@@ -48,10 +48,6 @@ if __name__ == '__main__':
     try:
         user_longitude = float(input('Input your coordinates.\nLongitude: '))
         user_latitude = float(input('Latitude: '))
-    except ValueError:
-        print('Type of coordinates is incorrect. Try again.')
-        sys.exit()
-    try:
         loaded_data = load_data(sys.argv[1])
         bars = create_bars_description_list(loaded_data)
         print('The largest bar: ',
@@ -72,3 +68,5 @@ if __name__ == '__main__':
         print('Path is incorrect. Try again.')
     except IndexError:
         print('Please enter path to file.')
+    except ValueError:
+        print('Type of coordinates is incorrect. Try again.')
