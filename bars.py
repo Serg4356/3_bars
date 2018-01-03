@@ -10,10 +10,7 @@ def load_data(filepath):
 
 
 def create_bars_description_list(loaded_data):
-    try:
-        return loaded_data['features']
-    except:
-        print('File structure is incorrect. Please load correct file.')
+    return loaded_data['features']
 
 
 def get_biggest_bar_name(bars_description_list):
